@@ -4,6 +4,8 @@ from datetime import datetime
 from jdlogger import logger
 from config import global_config
 
+##  fixme 每0.5秒一次  是不是太慢？？
+
 class Timer(object):
     def __init__(self, sleep_interval=0.5):
         # '2018-09-28 22:45:50.000'
