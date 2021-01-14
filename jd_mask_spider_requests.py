@@ -4,7 +4,7 @@ import time
 from jdlogger import logger
 from timer import Timer
 import requests
-from util import parse_json, get_session, get_sku_title,send_wechat
+from util import parse_json, get_session, get_sku_title, send_wechat
 from config import global_config
 
 
@@ -122,8 +122,9 @@ class Jd_Mask_Spider(object):
                 logger.info("抢购链接获取成功: %s", seckill_url)
                 return seckill_url
             else:
-                logger.info("抢购链接获取失败，%s不是抢购商品或抢购页面暂未刷新，0.5秒后重试")
+                logger.info("抢购链接获取失败，%s不是抢购商品或抢购页面暂未刷新，0.1秒后重试")
                 time.sleep(0.1)
+                # break
 
     def request_seckill_url(self):
         """访问商品的抢购链接（用于设置cookie等"""
@@ -234,7 +235,7 @@ class Jd_Mask_Spider(object):
             'skuId': self.sku_id,
         }
         self.seckill_order_data[self.sku_id] = self._get_seckill_order_data(
-            )
+        )
         logger.info('提交抢购订单...')
         headers = {
             'User-Agent': self.default_user_agent,
@@ -261,8 +262,8 @@ class Jd_Mask_Spider(object):
             total_money = resp_json.get('totalMoney')
             pay_url = 'https:' + resp_json.get('pcUrl')
             logger.info(
-                '抢购成功，订单号:{}, 总价:{}, 电脑端付款链接:{}'.format(order_id,total_money,pay_url)
-                )
+                '抢购成功，订单号:{}, 总价:{}, 电脑端付款链接:{}'.format(order_id, total_money, pay_url)
+            )
             if global_config.getRaw('messenger', 'enable') == 'true':
                 success_message = "抢购成功，订单号:{}, 总价:{}, 电脑端付款链接:{}".format(order_id, total_money, pay_url)
                 send_wechat(success_message)
