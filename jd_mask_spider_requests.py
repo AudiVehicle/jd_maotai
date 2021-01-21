@@ -122,8 +122,9 @@ class Jd_Mask_Spider(object):
                 logger.info("抢购链接获取成功: %s", seckill_url)
                 return seckill_url
             else:
-                logger.info("抢购链接获取失败，%s不是抢购商品或抢购页面暂未刷新，0.5秒后重试")
+                logger.info("抢购链接获取失败，%s不是抢购商品或抢购页面暂未刷新，0.1秒后重试")
                 time.sleep(0.1)
+                # break
 
     def request_seckill_url(self):
         """访问商品的抢购链接（用于设置cookie等"""
