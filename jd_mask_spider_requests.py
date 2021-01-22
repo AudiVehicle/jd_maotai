@@ -175,8 +175,14 @@ class Jd_Mask_Spider(object):
             'User-Agent': self.default_user_agent,
             'Host': 'marathon.jd.com',
         }
-        resp = self.session.post(url=url, data=data, headers=headers)
-        return parse_json(resp.text)
+        while True:
+            try:
+                resp = self.session.post(url=url, data=data, headers=headers)
+                return parse_json(resp.text)
+            except Exception:
+                print("获取秒杀初始化信息失败！！！等待0.1s以后再试。。。")
+                time.sleep(0.1)
+
 
     def _get_seckill_order_data(self):
         """生成提交抢购订单所需的请求体参数
