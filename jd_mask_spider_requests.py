@@ -180,8 +180,8 @@ class Jd_Mask_Spider(object):
                 resp = self.session.post(url=url, data=data, headers=headers)
                 return parse_json(resp.text)
             except Exception:
-                print("获取秒杀初始化信息失败！！！等待0.1s以后再试。。。")
-                time.sleep(0.1)
+                print("获取秒杀初始化信息失败！！！等待0.05s以后再试。。。")
+                time.sleep(0.05)
 
 
     def _get_seckill_order_data(self):
