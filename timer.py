@@ -19,5 +19,5 @@ class Timer(object):
             if now_time() >= self.buy_time:
                 logger.info('时间到达，开始执行……')
                 break
-            else:
-                time.sleep(self.sleep_interval)
+            # else:
+                # time.sleep(self.sleep_interval)
